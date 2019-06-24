@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block contents%}
+<body>
+<br>
+    
+{% for blog in posts %}
+
+<br><br>
+<div class=container>
+<div class="card" >
+    <div class="card-body">
+      <h2 class="card-title">제목:{{blog.title}}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">날짜:{{blog.pub_date}}</h6>
+      <p class="card-text">본문 미리보기 : {{blog.summary}}</p>
+      <a href="{% url 'detail' blog.id %}" class="card-link">..more</a>
+      
+    </div>
+  </div>
+</div>
+ <br><br>
+ {%endfor%}
+<div class = "container">
+<div class="text-center"> 
+{%if posts.has_previous%}
+<a href="?page=1">First</a>
+<a href="?page={{posts.previous_page_number}}">Previous</a>
+{%endif%}
+
+<span>{{posts.number}}</span>
+<span>of</span>
+<span>{{posts.paginator.num_pages}}</span>
+
+{%if posts.has_next%}
+<a href="?page={{posts.next_page_number}}">Next</a>
+<a href="?page={{posts.paginator.num_pages}}">Last</a>
+{%endif%}
+</div>
+</div>
+</body>
+{%endblock%}
+
