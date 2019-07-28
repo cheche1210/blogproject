@@ -22,12 +22,14 @@ def login(request):
         else:
             return render(request, 'login.html', {'error':'아이디 혹은 비밀번호가 틀립니다'})
     else:
-         return render(request,'home.html')
+         return render(request,'login.html')
 
 def logout(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         auth.logout(request)
         return redirect('home')
-    return render(request, 'login.html')
+    else:
+        print(request.method)
+        return render(request, 'login.html')
   
         
